@@ -22,7 +22,7 @@ jobs:
               }" \
             ${{ secrets.WEBHOOK_URI }}
       - name: Post notification (Issue)
-        if: github.event_name == 'issues' && github.event.action == 'opened'
+        if: github.event_name == 'issues'
         run: |
           cat ${GITHUB_EVENT_PATH}
           curl -i -X POST -H "Content-Type: application/json" \

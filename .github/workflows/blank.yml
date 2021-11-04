@@ -13,7 +13,6 @@ jobs:
       - name: Post notification (PR)
         if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize')
         run: |
-          set -x
           PR=$(jq -r '.pull_request._links.html[]' ${GITHUB_EVENT_PATH})
           USER=$(jq -r '.pull_request.user.login' ${GITHUB_EVENT_PATH})
           curl -i -X POST -H "Content-Type: application/json" \
@@ -25,6 +24,7 @@ jobs:
       - name: Post notification (Issue)
         if: github.event_name == 'issues' && github.event.action == 'opened'
         run: |
+          cat ${GITHUB_EVENT_PATH}
           curl -i -X POST -H "Content-Type: application/json" \
             -d "{ \
               \"channel_id\": \"${{ secrets.CHANNEL_ID }}\", \

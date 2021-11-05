@@ -22,7 +22,8 @@ jobs:
           curl -i -X POST -H "Content-Type: application/json" \
             -d "{ \
               \"channel_id\": \"${{ secrets.CHANNEL_ID }}\", \
-              \"username\": \"bot\", \
+              \"username\": \"bot (username)\", \
+              \"display_name\": \"bot (display)\", \
               \"text\": \"Pull Request ${{ github.event.action }} by ${USER} at ${PR}\" \
               }" \
             ${{ secrets.WEBHOOK_URI }}

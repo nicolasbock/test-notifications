@@ -11,7 +11,11 @@ jobs:
 
     steps:
       - name: Post notification (PR)
-        if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize')
+        if: |
+          github.event_name == 'pull_request'
+          && (github.event.action == 'opened'
+              || github.event.action == 'reopened'
+              || github.event.action == 'synchronize')
         run: |
           PR=$(jq -r '.pull_request._links.html[]' ${GITHUB_EVENT_PATH})
           USER=$(jq -r '.pull_request.user.login' ${GITHUB_EVENT_PATH})
